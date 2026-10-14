@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PFO 2 — Sistema de Gestión de Tareas</title>
+    <style>
+        :root {
+            --bg: #e8ecf1;
+            --card: #f6f7f9;
+            --accent: #3a5bb5;
+            --accent-2: #0f766e;
+            --text: #2b3445;
+            --muted: #566174;
+            --border: #d3d9e2;
+            --code-bg: #232d3f;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, #2f4a8f 0%, #2b3548 100%);
+            padding: 50px 20px;
+            text-align: center;
+            color: #f1f5f9;
+        }
+        header h1 { margin: 0 0 10px; font-size: 2.2rem; }
+        header p  { margin: 0; color: #cbd5e1; font-size: 1.05rem; }
+        .badges {
+            margin-top: 18px;
+            display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+        }
+        .badge {
+            background: rgba(255,255,255,0.10);
+            border: 1px solid rgba(255,255,255,0.22);
+            padding: 5px 12px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+        }
+        main { max-width: 900px; margin: 0 auto; padding: 36px 20px; }
+        section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 26px;
+            margin-bottom: 22px;
+            box-shadow: 0 1px 3px rgba(30,41,59,0.06);
+        }
+        h2 {
+            color: var(--accent);
+            margin-top: 0;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+            font-size: 1.35rem;
+        }
+        h3 { color: var(--accent-2); margin-bottom: 8px; font-size: 1.05rem; }
+        code {
+            background: #e3e7f4;
+            color: #3b3f93;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: var(--code-bg);
+            border-radius: 8px;
+            padding: 14px 16px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.88rem;
+            color: #b9dfe8;
+        }
+        pre code { background: none; color: inherit; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+        th { color: var(--accent); font-weight: 600; }
+        .method { font-weight: bold; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; }
+        .get  { background: #d6e2f5; color: #1e3a8a; }
+        .post { background: #d3eadb; color: #166534; }
+        ul li { margin-bottom: 6px; color: var(--muted); }
+        p { color: var(--muted); }
+        strong { color: var(--text); }
+        footer {
+            text-align: center;
+            padding: 28px 20px;
+            color: var(--muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+        }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .screenshots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+        .screenshots figure {
+            margin: 0;
+            background: #eceff4;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+        .screenshots img {
+            max-width: 100%;
+            border-radius: 6px;
+            display: block;
+        }
+        .screenshots figcaption {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Sistema de Gestión de Tareas</h1>
+    <p>API REST con Flask + SQLite + hash de contraseñas</p>
+    <div class="badges">
+        <span class="badge">Python</span>
+        <span class="badge">Flask</span>
+        <span class="badge">SQLite</span>
+        <span class="badge">Cliente-Servidor</span>
+    </div>
+</header>
+
+<main>
+
+    <section>
+        <h2>Descripción</h2>
+        <p>
+            API REST del <strong>PFO 2</strong> de Programación sobre Redes.
+            Permite registrar usuarios con contraseñas hasheadas, iniciar sesión
+            y acceder a una página de bienvenida de tareas. La persistencia es en
+            <strong>SQLite</strong>, siguiendo el modelo <em>cliente-servidor</em> visto en clase.
+        </p>
+    </section>
+
+    <section>
+        <h2>Cómo ejecutar</h2>
+        <h3>1. Instalar dependencias</h3>
+        <pre><code>pip install -r requirements.txt</code></pre>
+
+        <h3>2. Servidor (terminal 1)</h3>
+        <pre><code>python servidor.py</code></pre>
+        <p>Escucha en <code>http://localhost:5000</code>. La base <code>usuarios.db</code> se crea sola.</p>
+
+        <h3>3. Cliente (terminal 2)</h3>
+        <pre><code>python cliente.py</code></pre>
+    </section>
+
+    <section>
+        <h2>Endpoints</h2>
+        <table>
+            <thead>
+                <tr><th>Método</th><th>Ruta</th><th>Descripción</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="method post">POST</span></td>
+                    <td><code>/registro</code></td>
+                    <td>Registra un usuario (contraseña hasheada)</td>
+                </tr>
+                <tr>
+                    <td><span class="method post">POST</span></td>
+                    <td><code>/login</code></td>
+                    <td>Verifica credenciales e inicia sesión</td>
+                </tr>
+                <tr>
+                    <td><span class="method get">GET</span></td>
+                    <td><code>/tareas</code></td>
+                    <td>HTML de bienvenida (requiere login)</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Ejemplos con curl</h2>
+        <h3>Registrar</h3>
+        <pre><code>curl -X POST http://localhost:5000/registro \
+  -H "Content-Type: application/json" \
+  -d '{"usuario": "juan", "contraseña": "1234"}'</code></pre>
+
+        <h3>Login (guarda cookie de sesión)</h3>
+        <pre><code>curl -X POST http://localhost:5000/login \
+  -H "Content-Type: application/json" \
+  -d '{"usuario": "juan", "contraseña": "1234"}' \
+  -c cookies.txt</code></pre>
+
+        <h3>Tareas</h3>
+        <pre><code>curl http://localhost:5000/tareas -b cookies.txt</code></pre>
+
+        <h3>Respuestas esperadas</h3>
+        <ul>
+            <li>Registro correcto → <code>201</code></li>
+            <li>Usuario repetido → <code>409</code></li>
+            <li>Login correcto → <code>200</code></li>
+            <li>Credenciales incorrectas → <code>401</code></li>
+            <li><code>/tareas</code> sin sesión → <code>401</code></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Capturas de pantalla</h2>
+        <p>Pruebas del sistema desde el cliente de consola y el navegador:</p>
+        <div class="screenshots">
+            <figure>
+                <img src="img/registro_exitoso.png" alt="Registro exitoso">
+                <figcaption>Registro exitoso (201)</figcaption>
+            </figure>
+            <figure>
+                <img src="img/login_exitoso.png" alt="Login exitoso">
+                <figcaption>Login exitoso (200)</figcaption>
+            </figure>
+            <figure>
+                <img src="img/login_incorrecto.png" alt="Login incorrecto">
+                <figcaption>Login con datos incorrectos (401)</figcaption>
+            </figure>
+            <figure>
+                <img src="img/usuario_existente.png" alt="Usuario ya existente">
+                <figcaption>Usuario ya existente (409)</figcaption>
+            </figure>
+            <figure>
+                <img src="img/si_navegador.png" alt="Opción sí abrir navegador">
+                <figcaption>Ver tareas → elegir abrir en el navegador (s)</figcaption>
+            </figure>
+            <figure>
+                <img src="img/pantalla_navegador.png" alt="HTML de bienvenida en el navegador">
+                <figcaption>HTML de bienvenida en el navegador</figcaption>
+            </figure>
+            <figure>
+                <img src="img/no_navegador.png" alt="Bienvenida en la terminal">
+                <figcaption>Ver tareas → no abrir navegador (n), bienvenida en consola</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section>
+        <h2>Respuestas conceptuales</h2>
+
+        <h3>¿Por qué hashear contraseñas?</h3>
+        <p>
+            Guardar contraseñas en texto plano es un riesgo: si la base se filtra, cualquiera
+            podría leerlas. El <strong>hash</strong> es unidireccional: no se puede revertir
+            para obtener la contraseña original. Al login, el servidor hashea lo ingresado y
+            lo compara con el hash guardado. Eso refuerza la seguridad del servidor en la
+            arquitectura cliente-servidor. Se usó la librería <code>werkzeug.security</code>,
+            que viene con Flask.
+        </p>
+
+        <h3>Ventajas de SQLite en este proyecto</h3>
+        <ul>
+            <li>No hace falta un servidor de base de datos aparte.</li>
+            <li>Viene con Python (<code>sqlite3</code>), sin dependencias extra.</li>
+            <li>Todo vive en un archivo (<code>usuarios.db</code>), fácil de entregar.</li>
+            <li>Los datos persisten aunque se reinicie el servidor.</li>
+            <li>Ideal para un trabajo práctico chico como este.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Estructura del proyecto</h2>
+        <pre><code>PFO2/
+├── servidor.py
+├── cliente.py
+├── index.html
+├── README.md
+├── requirements.txt
+└── img/   (capturas de pantalla)</code></pre>
+    </section>
+
+</main>
+
+<footer>
+    PFO 2 — Programación sobre Redes ·
+    Documentación para GitHub Pages
+</footer>
+
+</body>
+</html>
